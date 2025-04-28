@@ -1,0 +1,66 @@
+* {
+	background-color: #f8f8f8;
+}
+
+body {
+	/* background: url("../images/background.png") no-repeat center fixed; */
+}
+
+.top-bar {
+	z-index: 100;
+	background-color: white;
+	height: 100px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	right: 0;
+}
+
+.logo-image {
+	z-index: 101;
+	height: 90px;
+	padding: 5px;
+	background-color: white;
+}
+
+.page {
+	width: 70%;
+	padding: 1em;
+	padding-top: 100px;
+	justify-self: center;
+	align-self: center;
+	margin: auto;
+	background-color: black;
+}
+
+.textbox {
+	background-color: #888888;
+	display: grid;
+	column-count: 1;
+	row-gap: 10px;
+}
+
+*:focus {
+	outline: none;
+}
+
+.response {
+	justify-self: center;
+	align-self: center;
+	width: 90%;
+	padding: 0%;
+	margin: 0%;
+}
+
+.prompt {
+	justify-self: center;
+	align-self: center;
+	width: 90%;
+	padding: 0%;
+	margin: 0%;
+	outline: none;
+	border: none;
+	background-color: lightgrey;
+	border: 1px;
+	border-radius: 2px;
+}
