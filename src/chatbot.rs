@@ -4,8 +4,8 @@ use openai_api_rs::v1::{
 	common::GPT4_O,
 };
 
-pub async fn get_response(request: &str) -> &str {
-	let api_key = std::env::var("").unwrap();
+pub async fn get_response(request: &str) -> String {
+	let api_key = std::env::var("OPENAI_API_KEY").unwrap();
 	let req = ChatCompletionRequest::new(
 		GPT4_O.to_string(),
 		vec![chat_completion::ChatCompletionMessage {
@@ -20,8 +20,8 @@ pub async fn get_response(request: &str) -> &str {
 		.with_api_key(api_key)
 		.build()
 		.unwrap();
-	let result = client.chat_completion(req).await;
-	""
+	let result = client.chat_completion(req).await.unwrap();
+	result.choices[0].message.content.clone().unwrap()
 }
 //
 //let result = client.chat_completion(req).await.unwrap();

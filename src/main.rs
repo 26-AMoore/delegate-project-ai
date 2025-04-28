@@ -14,7 +14,7 @@ async fn main() {
 			let (mut tx, mut rx) = web_socket.split();
 
 			while let Ok(mut prompt) = rx.next().await.unwrap() {
-				let mut response: &str = "null";
+				let mut response: String = String::from("null");
 				if prompt.is_text() {
 					response = chatbot::get_response(prompt.to_str().unwrap()).await;
 				}
