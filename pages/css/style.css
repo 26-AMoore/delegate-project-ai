@@ -1,5 +1,15 @@
+/* @font-face { */
+/* 	font-family: barlow; */
+/* 	src: url("barlow.ttf"); */
+/* } */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
 	background-color: #f8f8f8;
+	--bar-height: 80px;
+	--logo-width: calc(var(--bar-height) * 2.333);
+	font-family: barlow;
 }
 
 body {
@@ -9,35 +19,82 @@ body {
 .top-bar {
 	z-index: 100;
 	background-color: white;
-	height: 100px;
+	height: var(--bar-height);
 	width: 100%;
 	position: fixed;
 	top: 0;
 	right: 0;
 }
 
+.logo-link {
+	y: 0px;
+	position: fixed;
+	height: var(--bar-height);
+}
+
 .logo-image {
 	z-index: 101;
-	height: 90px;
-	padding: 5px;
+	height: calc(var(--bar-height));
+	padding: 0px;
 	background-color: white;
 }
+
+.debate-types {
+	background-color: white;
+	display: flex;
+	justify-content: flex-end;
+	top: 0;
+	/* left: calc(var(--logo-width) + 10px); */
+	right: 0;
+	position: absolute;
+	height: var(--bar-height);
+}
+
+.debate-types > .button {
+	align-self: center;
+	margin: 10px;
+	background-color: white;
+	border: 3px solid black;
+	height: calc(var(--bar-height) - 25px);
+	width: fit-content;
+	padding-left: 10px;
+	padding-right: 10px;
+	line-height: calc(var(--bar-height) - 25px);
+	text-align: center;
+	color: black;
+	text-decoration: 0 none none none;
+	text-decoration-line: none;
+	size-adjust: 150%;
+	font-size: 150%;
+}
+
+.button:hover {
+	background-color: lightblue;
+}
+
+.debate { }
+.profile { }
+.index { }
 
 .page {
 	width: 70%;
 	padding: 1em;
-	padding-top: 100px;
+	padding-top: var(--bar-height);
 	justify-self: center;
 	align-self: center;
 	margin: auto;
-	background-color: black;
 }
 
 .textbox {
-	background-color: #888888;
+	border: solid black 10px;
+	border-radius: 20px;
 	display: grid;
 	column-count: 1;
 	row-gap: 10px;
+}
+
+.warning {
+	color: red;
 }
 
 *:focus {
@@ -50,10 +107,18 @@ body {
 	width: 90%;
 	padding: 0%;
 	margin: 0%;
+	display: grid;
+	font-size: 120%;
+	text-align: center;
+	gap: 10px;
+	padding: 2%;
 }
 
 .prompt {
+	border-top: solid black 3px;
 	justify-self: center;
+	margin-bottom: 10px;
+	outline: none;
 	align-self: center;
 	width: 90%;
 	padding: 0%;
@@ -63,4 +128,33 @@ body {
 	background-color: lightgrey;
 	border: 1px;
 	border-radius: 2px;
+}
+
+.old-prompt {
+	border: solid black 2px;
+	justify-self: right;
+	text-align: left;
+	max-width: 30em;
+	text-wrap: wrap;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-right: 0;
+	overflow-wrap: break-word;
+	background-color: lightblue;
+	border-radius: 10px;
+}
+
+.old-response {
+	border: solid black 2px;
+	text-align: left;
+	max-width: 30em;
+	text-wrap: wrap;
+	overflow-wrap: break-word;
+	justify-self: left;
+	width: fit-content;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 0;
+	background-color: lightgray;
+	border-radius: 10px;
 }

@@ -10,7 +10,7 @@ pub async fn get_response(request: &str) -> String {
 		GPT4_O.to_string(),
 		vec![chat_completion::ChatCompletionMessage {
 			role: chat_completion::MessageRole::user,
-			content: chat_completion::Content::Text(String::from("")),
+			content: chat_completion::Content::Text(String::from(request)),
 			name: None,
 			tool_calls: None,
 			tool_call_id: None,
@@ -23,19 +23,3 @@ pub async fn get_response(request: &str) -> String {
 	let result = client.chat_completion(req).await.unwrap();
 	result.choices[0].message.content.clone().unwrap()
 }
-//
-//let result = client.chat_completion(req).await.unwrap();
-//println!("Content: {:?}", result.choices[0].message.content);
-//
-//let message = result.choices[0].message.clone();
-//
-//let response = http::Response::builder()
-//	.status(200)
-//	.body(message.content.unwrap().as_bytes())
-//	.unwrap_or(Response::default());
-//
-//let _ = stream.write(response.status().to_string().as_bytes());
-//
-//for (key, value) in client.headers.unwrap().iter() {
-//	println!("{}: {:?}", key, value);
-//}

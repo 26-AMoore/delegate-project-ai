@@ -1,8 +1,8 @@
+use std::{thread::sleep, time::Duration};
+
 use futures_util::{future, SinkExt, StreamExt, TryFutureExt};
 use warp::{filters::ws::Message, Filter};
 mod chatbot;
-
-use chatbot::*;
 
 #[tokio::main]
 async fn main() {
@@ -13,14 +13,24 @@ async fn main() {
 		ws.on_upgrade(async |web_socket| {
 			let (mut tx, mut rx) = web_socket.split();
 
-			while let Ok(mut prompt) = rx.next().await.unwrap() {
-				let mut response: String = String::from("null");
-				if prompt.is_text() {
-					response = chatbot::get_response(prompt.to_str().unwrap()).await;
+			loop {
+				let received = rx.next().await;
+				if received.is_none() {
+					break;
 				}
-				tx.send(Message::text(response))
-					.unwrap_or_else(|e| eprintln!("Websocket Error {}", e))
-					.await
+				if let Ok(prompt) = received.unwrap() {
+					let mut response: String = String::from("null");
+					if prompt.is_text() {
+						//response = chatbot::get_response(prompt.to_str().unwrap()).await;
+						sleep(Duration::from_secs(1));
+						response = String::from("New Response");
+					}
+					tx.send(Message::text(response))
+						.unwrap_or_else(|e| eprintln!("Websocket Error {}", e))
+						.await
+				} else {
+					break;
+				}
 			}
 		})
 	});
