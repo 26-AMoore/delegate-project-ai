@@ -1,5 +1,3 @@
-use std::{thread::sleep, time::Duration};
-
 use futures_util::{future, SinkExt, StreamExt, TryFutureExt};
 use warp::{filters::ws::Message, Filter};
 mod chatbot;
@@ -22,7 +20,6 @@ async fn main() {
 					let mut response: String = String::from("null");
 					if prompt.is_text() {
 						//response = chatbot::get_response(prompt.to_str().unwrap()).await;
-						sleep(Duration::from_secs(1));
 						response = String::from("New Response");
 					}
 					tx.send(Message::text(response))
@@ -35,8 +32,12 @@ async fn main() {
 		})
 	});
 
-	let address = [127, 0, 0, 1];
-	let main_serve = warp::serve(main).run((address, 8080));
+	let address = [0, 0, 0, 0];
+	let main_serve = warp::serve(main)
+		.tls()
+		.cert_path("tls/cert.pem")
+		.key_path("tls/key.pem")
+		.run((address, 8080));
 	let debug_serve = warp::serve(debug).run((address, 7878));
 	let ws_serve = warp::serve(ws).run((address, 3030));
 
