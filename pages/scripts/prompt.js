@@ -8,7 +8,6 @@ function send() {
 	socket.send(input.value.replaceAll("\n", ""));
 }
 
-// check if 
 input.addEventListener("keydown", function (event) {
 	if (event.key === "Enter" && input.value.replaceAll("\n", "")) {
 		send();
