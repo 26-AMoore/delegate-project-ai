@@ -4,6 +4,7 @@ console.log("loaded voice.js")
 let socket = new WebSocket('ws://127.0.0.1:3031/ws');
 let EPHEMERAL_KEY = ""; //TODO! key
 
+socket.send();
 socket.addEventListener("message", function (event) {
 	EPHEMERAL_KEY = event.data;
 	console.log(EPHEMERAL_KEY)
